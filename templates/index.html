@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日一卦 - 六神方位</title>
+</head>
+<body>
+    <h1>每日一卦</h1>
+    <p>今日日期：{{ date }} / {{ time_period }}</p>
+
+    {% if result %}
+        <h2>結果：</h2>
+        <ul>
+            <li>第一項：{{ result[0] }}</li>
+            <li>第二項：{{ result[1] }}</li>
+            <li>第三項：{{ result[2] }}</li>
+        </ul>
+    {% endif %}
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <input type="number" name="n1" placeholder="輸入數字1">
+        <input type="number" name="n2" placeholder="輸入數字2">
+        <input type="number" name="n3" placeholder="輸入數字3">
+
+        <button type="submit" name="custom">自定義</button>
+        <button type="submit" name="heavenly_union">天地合</button>
+    </form>
+</body>
+</html>
