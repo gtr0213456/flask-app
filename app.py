@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, jsonify
 from datetime import datetime
 import os
 import openai  # 確保導入 OpenAI 模組
@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = 'some_secret_key'
 
 # 設置 OpenAI API 密鑰
-openai.api_key = os.getenv('OPENAI_API_KEY')  # 從環境變數中獲取 API 
+openai.api_key = os.getenv('OPENAI_API_KEY')  # 從環境變數中獲取 API 密鑰
 
 # 六神六煞與五行方位對應表
 elements = [
@@ -30,8 +30,6 @@ def current_yin_yang(minute):
 def current_time_period(hour, minute):
     """根據當前小時和分鐘返回對應的時辰"""
     yin_yang = current_yin_yang(minute)
-
-    # 對應時辰
     periods = [
         ("子時", 23, 1), ("丑時", 1, 3), ("寅時", 3, 5), ("卯時", 5, 7),
         ("辰時", 7, 9), ("巳時", 9, 11), ("午時", 11, 13), ("未時", 13, 15),
@@ -79,10 +77,6 @@ def index():
         if not check_limits():
             return render_template('index.html', error="今日使用次數已達上限，請明天再試。")
 
-        if 'heavenly_union' in request.form:
-            result = get_elements(12, datetime.now().month, datetime.now().day)
-            return render_template('index.html', result=result)
-
         try:
             n1 = normalize_number(request.form.get('n1', 1))
             n2 = normalize_number(request.form.get('n2', 1))
@@ -106,4 +100,4 @@ def index():
     return render_template('index.html', date=now, time_period=time_period)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
