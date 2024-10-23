@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = 'some_secret_key'
 
 # 設置 OpenAI API 密鑰
-openai.api_key = os.getenv('OPENAI_API_KEY')  # 確保在環境變數中設置你的 API 密鑰
+openai.api_key = os.getenv('OPENAI_API_KEY')  # 從環境變數中獲取 API 
 
 # 六神六煞與五行方位對應表
 elements = [
