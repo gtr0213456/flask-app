@@ -18,14 +18,20 @@
         </ul>
     {% endif %}
 
+    {% if analysis %}
+        <h2>綜合解析：</h2>
+        <p>{{ analysis }}</p>
+    {% endif %}
+
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
 
     <form method="POST">
-        <input type="number" name="n1" placeholder="輸入數字1">
-        <input type="number" name="n2" placeholder="輸入數字2">
-        <input type="number" name="n3" placeholder="輸入數字3">
+        <input type="number" name="n1" placeholder="輸入數字1" required>
+        <input type="number" name="n2" placeholder="輸入數字2" required>
+        <input type="number" name="n3" placeholder="輸入數字3" required>
+        <input type="text" name="keyword" placeholder="查詢關鍵字">  <!-- 新增的關鍵字輸入欄位 -->
 
         <button type="submit" name="custom">自定義</button>
         <button type="submit" name="heavenly_union">天地合</button>
