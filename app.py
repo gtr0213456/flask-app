@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, jsonify
+from flask import Flask, render_template, request, session
 from datetime import datetime
 import os
 import openai  # 確保導入 OpenAI 模組
